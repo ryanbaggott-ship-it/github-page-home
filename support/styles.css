@@ -15,11 +15,45 @@
             padding: 2rem;
         }
 
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            z-index: 100;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 10px 16px;
+            background: rgba(35, 134, 54, 0.9);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid #2ea043;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .nav-button:hover {
+            background: #2ea043;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(35, 134, 54, 0.4);
+        }
+
         .container {
             text-align: center;
             animation: fadeIn 0.8s ease-in;
             max-width: 600px;
             width: 100%;
+            margin-top: 3rem;
         }
 
         .logo {
