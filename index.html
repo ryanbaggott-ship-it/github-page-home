@@ -12,6 +12,7 @@
   var slug='5wMHSbywJ';
   var apiBase='https://paymegpt.com';
   var PIN_TOKEN_KEY='lp_pin_'+slug;
+  var pinPassed=false;
   var storedToken=localStorage.getItem(PIN_TOKEN_KEY);
   if(storedToken){
     try{
@@ -19,7 +20,7 @@
       var parts=decoded.split(':');
       if(parts[0]==='pin'&&parts.length>=4){
         var ts=parseInt(parts[3]);
-        if(Date.now()-ts<24*60*60*1000){document.body.style.visibility='visible';return;}
+        if(Date.now()-ts<24*60*60*1000){pinPassed=true;}
       }
     }catch(e){}
   }
@@ -30,9 +31,10 @@
     var url=new URL(window.location.href);
     url.searchParams.delete('pin_access_token');
     window.history.replaceState({},'',url.toString());
-    document.body.style.visibility='visible';
-    return;
+    pinPassed=true;
   }
+  if(pinPassed){document.addEventListener('DOMContentLoaded',function(){document.body.style.visibility='visible';});return;}
+  document.addEventListener('DOMContentLoaded',function(){
   var currentMethod='email';
   var currentIdentifier='';
   var gateHtml='<div id="pin-gate" style="position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);display:flex;align-items:center;justify-content:center;z-index:999999;font-family:system-ui,-apple-system,sans-serif;padding:16px;">' +
@@ -97,6 +99,7 @@
   document.getElementById('pin-back-btn').addEventListener('click',function(){verForm.style.display='none';reqForm.style.display='block';codeInput.value='';verError.style.display='none';});
   codeInput.addEventListener('input',function(e){e.target.value=e.target.value.replace(/[^0-9]/g,'').slice(0,6);});
   idInput.focus();
+  });
 })();
 </script>  <link rel="stylesheet" href="styles.css">
 </head>
